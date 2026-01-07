@@ -111,10 +111,9 @@ body {
 }
 
 .nav-container {
-    max-width: 1400px;
-    margin: 0 auto;
+    width: 100%;
     height: 100%;
-    padding: 0 80px;
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -129,6 +128,12 @@ body {
 
 .logo-icon {
     color: var(--primary-accent);
+}
+
+.logo-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
 }
 
 .logo-text {
@@ -246,6 +251,21 @@ body {
         var(--background);
 }
 
+[data-theme="light"] .hero-headline {
+    text-shadow:
+        0 0 40px rgba(255, 255, 255, 0.9),
+        0 0 80px rgba(255, 255, 255, 0.8),
+        0 4px 20px rgba(255, 255, 255, 0.7),
+        0 8px 40px rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="light"] .hero-subheadline {
+    text-shadow:
+        0 0 30px rgba(255, 255, 255, 0.9),
+        0 0 60px rgba(255, 255, 255, 0.8),
+        0 2px 15px rgba(255, 255, 255, 0.7);
+}
+
 .hero-content {
     max-width: 1400px;
     text-align: center;
@@ -267,11 +287,12 @@ body {
 .phone-mockups {
     position: relative;
     height: 350px;
-    margin: 0 auto 100px;
+    margin: 0 auto 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     perspective: 1000px;
+    z-index: 20;
 }
 
 .phone {
@@ -283,6 +304,7 @@ body {
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     position: absolute;
     transition: transform 0.3s ease;
+    z-index: 21;
 }
 
 [data-theme="light"] .phone {
@@ -432,6 +454,13 @@ body {
     line-height: 1.1;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards 1s;
+    position: relative;
+    z-index: 5;
+    text-shadow:
+        0 0 40px rgba(0, 0, 0, 0.9),
+        0 0 80px rgba(0, 0, 0, 0.8),
+        0 4px 20px rgba(0, 0, 0, 0.7),
+        0 8px 40px rgba(0, 0, 0, 0.6);
 }
 
 .hero-subheadline {
@@ -442,6 +471,12 @@ body {
     line-height: 1.6;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards 1.2s;
+    position: relative;
+    z-index: 5;
+    text-shadow:
+        0 0 30px rgba(0, 0, 0, 0.9),
+        0 0 60px rgba(0, 0, 0, 0.8),
+        0 2px 15px rgba(0, 0, 0, 0.7);
 }
 
 .hero-cta {
@@ -458,6 +493,8 @@ body {
     transition: all 0.3s ease;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards 1.4s;
+    position: relative;
+    z-index: 5;
 }
 
 .hero-cta:hover {
@@ -1030,6 +1067,86 @@ body {
     border-radius: 24px;
     padding: 60px;
     box-shadow: var(--border-glow);
+    position: relative;
+}
+
+.form-loading-overlay,
+.form-success-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    animation: fadeIn 0.3s ease;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--border-color);
+    border-top-color: var(--primary-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+.loading-text {
+    font-size: 18px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--primary-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+    animation: scaleIn 0.5s ease;
+}
+
+.success-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.success-message {
+    font-size: 16px;
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 400px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
 }
 
 .contact-form {
@@ -1297,7 +1414,6 @@ body {
 /* Responsive Design */
 @media (max-width: 1399px) {
 
-    .nav-container,
     .hero-content,
     .bento-section,
     .pricing-section,
@@ -1317,7 +1433,7 @@ body {
 
 @media (max-width: 1023px) {
     .nav-container {
-        padding: 0 40px;
+        padding: 0 20px;
     }
 
     .nav-menu {
@@ -1385,7 +1501,10 @@ body {
         display: none;
     }
 
-    .nav-container,
+    .nav-container {
+        padding: 0 20px;
+    }
+
     .hero,
     .bento-section,
     .pricing-section,

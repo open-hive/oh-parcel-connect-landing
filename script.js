@@ -12,16 +12,15 @@ themeToggle.addEventListener('click', () => {
 
     htmlElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
+
+    // Update navbar background immediately
+    const navbar = document.querySelector('.navbar');
+    if (newTheme === 'light') {
+        navbar.style.background = 'rgba(255, 255, 255, 0.9)';
+    } else {
+        navbar.style.background = 'rgba(10, 10, 10, 0.8)';
+    }
 });
-
-// Update navbar background immediately
-const navbar = document.querySelector('.navbar');
-if (newTheme === 'light') {
-    navbar.style.background = 'rgba(255, 255, 255, 0.9)';
-} else {
-    navbar.style.background = 'rgba(10, 10, 10, 0.8)';
-}
-
 // Custom Cursor
 const cursor = document.querySelector('.custom-cursor');
 let mouseX = 0;
@@ -263,33 +262,56 @@ const contactObserver = new IntersectionObserver((entries) => {
 contactObserver.observe(contactSection);
 
 // Contact Form Submission
+// Contact Form Submission
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const nameInput = document.getElementById('nameInput');
-    const requestInput = document.getElementById('requestInput');
+    const emailInput = document.getElementById('emailInput');
+    const phoneInput = document.getElementById('phoneInput');
+    const messageInput = document.getElementById('messageInput');
+
+    // Get form container for overlay
+    const formSection = document.querySelector('.contact-form-section');
+
+    // Create loading overlay
+    const loadingOverlay = document.createElement('div');
+    loadingOverlay.className = 'form-loading-overlay';
+    loadingOverlay.innerHTML = `
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Sending your message...</div>
+    `;
+    formSection.appendChild(loadingOverlay);
 
     // Simulate form submission
-    const submitButton = contactForm.querySelector('.form-submit');
-    const originalText = submitButton.textContent;
-
-    submitButton.textContent = 'SENDING...';
-    submitButton.disabled = true;
-
     setTimeout(() => {
-        submitButton.textContent = 'SENT!';
-        submitButton.style.background = '#00E6AC';
+        // Remove loading overlay
+        loadingOverlay.remove();
 
+        // Create success overlay
+        const successOverlay = document.createElement('div');
+        successOverlay.className = 'form-success-overlay';
+        successOverlay.innerHTML = `
+            <div class="success-icon">✓</div>
+            <div class="success-title">Message Sent!</div>
+            <div class="success-message">Thank you for contacting us. We'll get back to you soon.</div>
+        `;
+        formSection.appendChild(successOverlay);
+
+        // Clear form fields
+        nameInput.value = '';
+        emailInput.value = '';
+        phoneInput.value = '';
+        messageInput.value = '';
+
+        // Remove success overlay after 3 seconds
         setTimeout(() => {
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
-            submitButton.style.background = '';
-            nameInput.value = '';
-            requestInput.value = '';
-        }, 2000);
-    }, 1500);
+            successOverlay.style.opacity = '0';
+            setTimeout(() => successOverlay.remove(), 300);
+        }, 3000);
+    }, 2000);
 });
 
 // Route Calculator
@@ -394,7 +416,7 @@ window.addEventListener('scroll', () => {
     const heroHeight = hero.offsetHeight;
 
     if (scrolled < heroHeight) {
-        const parallaxSpeed = 0.5;
+        const parallaxSpeed = 0.1;
         phoneMockups.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
     }
 });

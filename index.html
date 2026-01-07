@@ -24,13 +24,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <svg class="logo-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                    <rect x="8" y="12" width="24" height="16" rx="2" stroke="currentColor" stroke-width="2" />
-                    <path d="M8 18 L32 18" stroke="currentColor" stroke-width="2" />
-                    <circle cx="12" cy="28" r="3" stroke="currentColor" stroke-width="2" />
-                    <circle cx="28" cy="28" r="3" stroke="currentColor" stroke-width="2" />
-                    <path d="M15 28 L25 28" stroke="currentColor" stroke-width="2" />
-                </svg>
+                <img src="assets/logo.png" alt="Parcel Connect Logo" class="logo-image">
                 <span class="logo-text">Parcel Connect</span>
             </div>
             <div class="nav-menu" id="navMenu">
@@ -281,8 +275,16 @@
                         <input type="text" class="form-input" id="nameInput" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">REQUEST</label>
-                        <textarea class="form-textarea" id="requestInput" rows="5" required></textarea>
+                        <label class="form-label">EMAIL</label>
+                        <input type="email" class="form-input" id="emailInput" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">PHONE NUMBER</label>
+                        <input type="tel" class="form-input" id="phoneInput" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">MESSAGE</label>
+                        <textarea class="form-textarea" id="messageInput" rows="5" required></textarea>
                     </div>
                     <button type="submit" class="form-submit">SEND REQUEST</button>
                 </form>
