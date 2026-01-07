@@ -279,9 +279,25 @@ body {
 
 .hero-content {
     max-width: 1400px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 80px;
     position: relative;
     z-index: 10;
+}
+
+.hero-text-section {
+    flex: 1;
+    text-align: left;
+    max-width: 600px;
+}
+
+.hero-phone-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero-text-content {
@@ -301,8 +317,7 @@ body {
 .hero-subheadline {
     font-size: 20px;
     color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto 40px;
+    margin: 0 0 40px 0;
     line-height: 1.6;
 }
 
@@ -310,9 +325,9 @@ body {
 .hero-email-form {
     display: flex;
     gap: 12px;
-    max-width: 500px;
-    margin: 0 auto 60px;
-    justify-content: center;
+    max-width: 550px;
+    margin: 0;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -363,7 +378,7 @@ body {
 /* Phone Mockups */
 .phone-mockups {
     position: relative;
-    height: 600px;
+    height: 560px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1167,14 +1182,30 @@ section {
 }
 
 @media (max-width: 768px) {
+    .hero-content {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .hero-text-section {
+        text-align: center;
+        max-width: 100%;
+    }
+
     .hero-headline {
         font-size: 48px;
+    }
+
+    .hero-subheadline {
+        font-size: 18px;
     }
 
     .hero-email-form {
         flex-direction: column;
         width: 100%;
         padding: 0 20px;
+        justify-content: center;
     }
 
     .hero-email-input {
@@ -1183,6 +1214,15 @@ section {
 
     .hero-email-submit {
         width: 100%;
+    }
+
+    .phone-mockups {
+        height: 450px;
+    }
+
+    .phone {
+        width: 240px;
+        height: 480px;
     }
 
     .register-text h2 {
