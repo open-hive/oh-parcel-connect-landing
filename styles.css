@@ -302,9 +302,63 @@ body {
     font-size: 20px;
     color: var(--text-secondary);
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 40px;
     line-height: 1.6;
 }
+
+/* Hero Email Form */
+.hero-email-form {
+    display: flex;
+    gap: 12px;
+    max-width: 500px;
+    margin: 0 auto 60px;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-email-input {
+    flex: 1;
+    padding: 16px 24px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-primary);
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.hero-email-input:focus {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 20px rgba(0, 230, 172, 0.2);
+}
+
+.hero-email-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.hero-email-submit {
+    background: #0A0A0A;
+    color: #FFF;
+    border: none;
+    padding: 16px 36px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+[data-theme="light"] .hero-email-submit {
+    background: #0A0A0A;
+}
+
+.hero-email-submit:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
 
 /* Phone Mockups */
 .phone-mockups {
@@ -1115,6 +1169,20 @@ section {
 @media (max-width: 768px) {
     .hero-headline {
         font-size: 48px;
+    }
+
+    .hero-email-form {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .hero-email-input {
+        width: 100%;
+    }
+
+    .hero-email-submit {
+        width: 100%;
     }
 
     .register-text h2 {

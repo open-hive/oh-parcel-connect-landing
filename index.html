@@ -28,10 +28,10 @@
                 <span class="logo-text">Parcel Connect</span>
             </div>
             <div class="nav-menu" id="navMenu">
-                <a href="#hero" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#pricing" class="nav-link">Pricing</a>
-                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
             </div>
             <div class="nav-controls">
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -63,6 +63,13 @@
             <h1 class="hero-headline">Peer-to-Peer Parcel Delivery</h1>
             <p class="hero-subheadline">Leveraging existing travel routes to make parcel delivery faster, more
                 affordable, and accessible across Botswana.</p>
+
+            <!-- Hero Email Form -->
+            <form class="hero-email-form" id="heroEmailForm">
+                <input type="email" placeholder="Enter your email for registration" class="hero-email-input" required>
+                <button type="submit" class="hero-email-submit">Submit</button>
+            </form>
+
             <div class="phone-mockups">
                 <div class="phone phone-center">
                     <div class="phone-screen">
@@ -75,93 +82,7 @@
         </div>
     </section>
 
-
-    <!-- About Section -->
-    <section class="about-section" id="about">
-        <div class="section-container split-layout">
-            <div class="text-content">
-                <h2 class="section-title-left">How Parcel Connect Works</h2>
-                <p class="about-description">
-                    Parcel Connect is a mobile application that allows people who are already travelling, particularly
-                    long-distance commuters, to carry parcels for others along their journey. For example, someone
-                    travelling from Gaborone to Maun can collect a parcel in Gaborone and deliver it in Maun.
-                </p>
-                <p class="about-description">
-                    The platform matches senders with verified travellers, helping to reduce delivery costs while
-                    creating small earning opportunities for commuters.
-                </p>
-
-                <div class="feature-card-list">
-                    <div class="feature-item-card">
-                        <div class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path
-                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div class="feature-text">
-                            <h3>Faster Delivery</h3>
-                            <p>Parcels move with travelers already on the road, reducing wait times significantly.</p>
-                        </div>
-                    </div>
-
-                    <div class="feature-item-card">
-                        <div class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                            </svg>
-                        </div>
-                        <div class="feature-text">
-                            <h3>More Affordable</h3>
-                            <p>Cut courier costs by up to 60% with peer-to-peer pricing that's fair for everyone.</p>
-                        </div>
-                    </div>
-
-                    <div class="feature-item-card">
-                        <div class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="8.5" cy="7" r="4"></circle>
-                                <line x1="20" y1="8" x2="20" y2="14"></line>
-                                <line x1="23" y1="11" x2="17" y2="11"></line>
-                            </svg>
-                        </div>
-                        <div class="feature-text">
-                            <h3>Verified Travelers</h3>
-                            <p>Direct contact with verified drivers. No middlemen, no delays, full transparency.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="visual-content">
-                <div class="circle-bg"></div>
-                <div class="phone-display">
-                    <img src="assets/images/photo_8_2026-01-07_11-33-51.jpg" alt="App Feature View"
-                        class="feature-phone-img">
-                </div>
-                <div class="floating-card earnings-float">
-                    <div class="float-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-                        </svg>
-                    </div>
-                    <div class="float-content">
-                        <span class="float-label">Save up to</span>
-                        <span class="float-value">P2,864</span>
-                        <span class="float-sub">Annually</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section (Matches Image 0/4) -->
+    <!-- Stats Section -->
     <section class="stats-section">
         <div class="stats-container">
             <div class="stat-item">
@@ -186,7 +107,7 @@
         </div>
     </section>
 
-    <!-- Register/CTA Section (Matches Image 1) -->
+    <!-- Register/CTA Section -->
     <section class="register-section" id="contact">
         <div class="register-card">
             <div class="register-content">
@@ -204,150 +125,6 @@
                     <div class="phone-tilt-container">
                         <img src="assets/images/photo_7_2026-01-07_11-33-51.jpg" alt="Parcel Connect App"
                             class="tilt-phone">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section (Matches Image 3) -->
-    <section class="pricing-section-new" id="pricing">
-        <div class="section-header">
-            <h2 class="section-title">Price Plan</h2>
-            <p class="section-subtitle">Transparent pricing for every parcel size.</p>
-            <div class="dots-accent">
-                <span></span><span></span><span></span><span></span><span></span><span></span>
-            </div>
-        </div>
-
-        <div class="pricing-cards-container">
-            <!-- Basic Plan -->
-            <div class="pricing-card-modern">
-                <div class="plan-header">
-                    <h3>Envelope</h3>
-                </div>
-                <div class="plan-price">
-                    <span class="currency">P</span>
-                    <span class="amount">50</span>
-                    <span class="period">/Start</span>
-                </div>
-                <div class="plan-features">
-                    <ul class="feature-list">
-                        <li><span class="check">✓</span> Envelope / Keys</li>
-                        <li><span class="check">✓</span> Instant Routing</li>
-                        <li><span class="check">✓</span> Real-time Tracking</li>
-                        <li><span class="check">✓</span> Verified Drivers</li>
-                    </ul>
-                </div>
-                <button class="plan-button">Get Started</button>
-            </div>
-
-            <!-- Premium Plan (Center) -->
-            <div class="pricing-card-modern plan-featured">
-                <div class="plan-tag">Premium</div>
-                <div class="plan-header">
-                    <h3>Standard Box</h3>
-                </div>
-                <div class="plan-price">
-                    <span class="currency">P</span>
-                    <span class="amount">120</span>
-                    <span class="period">/Start</span>
-                </div>
-                <div class="plan-features">
-                    <ul class="feature-list">
-                        <li><span class="check">✓</span> Shoe Box Size</li>
-                        <li><span class="check">✓</span> Cheaper than Courier</li>
-                        <li><span class="check">✓</span> Insurance Included</li>
-                        <li><span class="check">✓</span> Priority Matching</li>
-                    </ul>
-                </div>
-                <button class="plan-button button-filled">Get Started</button>
-            </div>
-
-            <!-- Standard Plan -->
-            <div class="pricing-card-modern">
-                <div class="plan-header">
-                    <h3>Custom Cargo</h3>
-                </div>
-                <div class="plan-price">
-                    <span class="currency">P</span>
-                    <span class="amount">VAR</span>
-                    <span class="period">/Nego</span>
-                </div>
-                <div class="plan-features">
-                    <ul class="feature-list">
-                        <li><span class="check">✓</span> Large Items</li>
-                        <li><span class="check">✓</span> Negotiated Price</li>
-                        <li><span class="check">✓</span> Van/Truck Drivers</li>
-                        <li><span class="check">✓</span> Custom Schedules</li>
-                    </ul>
-                </div>
-                <button class="plan-button">Get Started</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section (Matches Image 2) -->
-    <section class="faq-section" id="faq">
-        <div class="section-header">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <p class="section-subtitle">Everything you need to know about Parcel Connect.</p>
-        </div>
-
-        <div class="faq-container">
-            <div class="faq-layout">
-                <div class="faq-accordions">
-                    <div class="accordion-item open">
-                        <div class="accordion-header">
-                            <h3>How do I become a driver?</h3>
-                            <button class="accordion-toggle">−</button>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Simply download the app, register as a driver, and submit your vehicle and ID details for
-                                verification. Once approved, you can start matching with parcels along your route.</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <h3>Is my parcel insured?</h3>
-                            <button class="accordion-toggle">+</button>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Yes, all premium and standard deliveries include basic insurance coverage. You can
-                                purchase additional coverage for high-value items within the app.</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <h3>How does payment work?</h3>
-                            <button class="accordion-toggle">+</button>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Payments are held in escrow until the parcel is successfully delivered and confirmed by
-                                the recipient. We support mobile money and credit cards.</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <div class="accordion-header">
-                            <h3>Can I send parcels internationally?</h3>
-                            <button class="accordion-toggle">+</button>
-                        </div>
-                        <div class="accordion-content">
-                            <p>Currently, we operate within Botswana (Gaborone, Francistown, Maun, Kasane), but we are
-                                planning to expand to cross-border routes soon.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-visual">
-                    <div class="circle-bg-small"></div>
-                    <img src="assets/images/photo_8_2026-01-07_11-33-51.jpg" alt="FAQ Help" class="faq-image">
-                    <div class="floating-search">
-                        <span class="search-icon">🔍</span>
-                        <span>How to track?</span>
                     </div>
                 </div>
             </div>

@@ -177,4 +177,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Hero Email Form submission
+const heroEmailForm = document.getElementById('heroEmailForm');
+if (heroEmailForm) {
+    heroEmailForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const emailInput = heroEmailForm.querySelector('.hero-email-input');
+        if (emailInput.value) {
+            alert('Thank you for registering! We will contact you soon.');
+            emailInput.value = '';
+        }
+    });
+}
+
 console.log('🚀 ParcelConnect Layout Updated!');
