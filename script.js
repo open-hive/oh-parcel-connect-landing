@@ -117,31 +117,21 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            // entry.target.style.opacity = '1';
-            // entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target); // Run once
         }
     });
 }, observerOptions);
 
-const animatedElements = document.querySelectorAll('.feature-item-card, .pricing-card-modern, .register-card, .stat-item, .section-title');
-animatedElements.forEach((el, index) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = `opacity 0.6s ease, transform 0.6s ease`;
+// Observe all elements with .fade-in-up class
+document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+
+// Legacy support for specific elements if they aren't updated to use .fade-in-up in HTML yet
+const legacyAnimatedElements = document.querySelectorAll('.feature-item-card, .pricing-card-modern, .register-card, .stat-item, .section-title, .feature-box');
+legacyAnimatedElements.forEach(el => {
+    el.classList.add('fade-in-up');
     observer.observe(el);
 });
-
-// Modify observer callback to handle style directly for simplicity
-const styleObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-animatedElements.forEach(el => styleObserver.observe(el));
 
 
 // Navbar background on scroll
@@ -190,4 +180,51 @@ if (heroEmailForm) {
     });
 }
 
-console.log('🚀 ParcelConnect Layout Updated!');
+// Carousel Auto-Scroll
+const carouselTrack = document.querySelector('.carousel-track');
+if (carouselTrack) {
+    // Clone items for infinite effect
+    const items = Array.from(carouselTrack.children);
+    items.forEach(item => {
+        const clone = item.cloneNode(true);
+        carouselTrack.appendChild(clone);
+    });
+
+    let scrollPos = 0;
+    let isPaused = false;
+    const speed = 1; // Pixels per frame
+
+    function autoScroll() {
+        if (!isPaused) {
+            scrollPos += speed;
+            // If we've scrolled past the original set, reset to 0
+            // We assume clones effectively double the width, so resetting at half width checks out
+            // However, slight precision issues might occur.
+            // Better check: if scrollLeft >= scrollWidth / 2
+            if (scrollPos >= carouselTrack.scrollWidth / 2) {
+                scrollPos = 0;
+            }
+            carouselTrack.style.transform = `translateX(-${scrollPos}px)`;
+        }
+        requestAnimationFrame(autoScroll);
+    }
+
+    autoScroll();
+
+    // Pause on hover
+    const carouselSection = document.querySelector('.app-showcase-section');
+    if (carouselSection) {
+        carouselSection.addEventListener('mouseenter', () => isPaused = true);
+        carouselSection.addEventListener('mouseleave', () => isPaused = false);
+
+        // Also allow manual touch scrolling to pause? 
+        // If we use transform for auto-scroll, native scrolling might fight it.
+        // For simplicity, we disable native scroll on track by hiding overflow hidden on container
+        // and relying purely on this JS transform. 
+        // But the previous CSS had overflow-x: auto. 
+        // If we want auto-spin + manual scroll, it's complex. 
+        // Let's stick to auto-spin essentially acting as a marquee.
+        // We will update CSS to hide overflow and rely on this.
+    }
+}
+
