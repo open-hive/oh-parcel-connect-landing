@@ -49,6 +49,7 @@ const particlesContainer = document.getElementById('particles');
 const particleCount = 50;
 
 function createParticles() {
+    if (!particlesContainer) return; // Exit if container doesn't exist
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
