@@ -259,17 +259,21 @@ if (carouselTrack) {
     }
 
     // Previous slide
-    prevBtn.addEventListener('click', () => {
-        let newIndex = currentIndex - 1;
-        if (newIndex < 0) newIndex = totalSlides - 1;
-        goToSlide(newIndex);
-    });
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            let newIndex = currentIndex - 1;
+            if (newIndex < 0) newIndex = totalSlides - 1;
+            goToSlide(newIndex);
+        });
+    }
 
     // Next slide
-    nextBtn.addEventListener('click', () => {
-        let newIndex = (currentIndex + 1) % totalSlides;
-        goToSlide(newIndex);
-    });
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            let newIndex = (currentIndex + 1) % totalSlides;
+            goToSlide(newIndex);
+        });
+    }
 
     // Indicator click
     indicators.forEach((indicator, index) => {
