@@ -181,10 +181,32 @@ if (heroEmailForm) {
     });
 }
 
-// Carousel Auto-Scroll
+// Enhanced Carousel with Controls, Indicators, and Fullscreen
 const carouselTrack = document.querySelector('.carousel-track');
 if (carouselTrack) {
-    // Clone items for infinite effect
+    const carouselCards = document.querySelectorAll('.carousel-card');
+    const totalSlides = carouselCards.length;
+    const indicators = document.querySelectorAll('.indicator');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+
+    // Fullscreen viewer elements
+    const fullscreenViewer = document.getElementById('fullscreenViewer');
+    const fullscreenImage = fullscreenViewer.querySelector('.fullscreen-image');
+    const fullscreenClose = fullscreenViewer.querySelector('.fullscreen-close');
+    const fullscreenPrev = fullscreenViewer.querySelector('.fullscreen-prev');
+    const fullscreenNext = fullscreenViewer.querySelector('.fullscreen-next');
+    const currentSlideSpan = fullscreenViewer.querySelector('.current-slide');
+
+    let currentIndex = 0;
+    let fullscreenIndex = 0;
+
+    // Image sources for fullscreen
+    const imageSources = Array.from(carouselCards).map(card =>
+        card.querySelector('img').src
+    );
+
+    // Clone items for infinite scroll effect
     const items = Array.from(carouselTrack.children);
     items.forEach(item => {
         const clone = item.cloneNode(true);
@@ -194,38 +216,146 @@ if (carouselTrack) {
     let scrollPos = 0;
     let isPaused = false;
     const speed = 1; // Pixels per frame
+    const cardWidth = 280 + 30; // Card width + gap
 
+    // Auto-scroll animation
     function autoScroll() {
         if (!isPaused) {
             scrollPos += speed;
-            // If we've scrolled past the original set, reset to 0
-            // We assume clones effectively double the width, so resetting at half width checks out
-            // However, slight precision issues might occur.
-            // Better check: if scrollLeft >= scrollWidth / 2
+            // Reset when scrolled past half (original set)
             if (scrollPos >= carouselTrack.scrollWidth / 2) {
                 scrollPos = 0;
             }
             carouselTrack.style.transform = `translateX(-${scrollPos}px)`;
+
+            // Update current index based on scroll position
+            currentIndex = Math.floor(scrollPos / cardWidth) % totalSlides;
+            updateIndicators();
         }
         requestAnimationFrame(autoScroll);
     }
 
     autoScroll();
 
-    // Pause on hover
-    const carouselSection = document.querySelector('.app-showcase-section');
-    if (carouselSection) {
-        carouselSection.addEventListener('mouseenter', () => isPaused = true);
-        carouselSection.addEventListener('mouseleave', () => isPaused = false);
-
-        // Also allow manual touch scrolling to pause? 
-        // If we use transform for auto-scroll, native scrolling might fight it.
-        // For simplicity, we disable native scroll on track by hiding overflow hidden on container
-        // and relying purely on this JS transform. 
-        // But the previous CSS had overflow-x: auto. 
-        // If we want auto-spin + manual scroll, it's complex. 
-        // Let's stick to auto-spin essentially acting as a marquee.
-        // We will update CSS to hide overflow and rely on this.
+    // Update active indicator
+    function updateIndicators() {
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentIndex);
+        });
     }
+
+    // Navigate to specific slide
+    function goToSlide(index) {
+        isPaused = true;
+        currentIndex = index;
+        scrollPos = index * cardWidth;
+        carouselTrack.style.transform = `translateX(-${scrollPos}px)`;
+        updateIndicators();
+
+        // Resume auto-scroll after a delay
+        setTimeout(() => {
+            isPaused = false;
+        }, 3000);
+    }
+
+    // Previous slide
+    prevBtn.addEventListener('click', () => {
+        let newIndex = currentIndex - 1;
+        if (newIndex < 0) newIndex = totalSlides - 1;
+        goToSlide(newIndex);
+    });
+
+    // Next slide
+    nextBtn.addEventListener('click', () => {
+        let newIndex = (currentIndex + 1) % totalSlides;
+        goToSlide(newIndex);
+    });
+
+    // Indicator click
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            goToSlide(index);
+        });
+    });
+
+    // Pause on hover
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+        carouselContainer.addEventListener('mouseenter', () => isPaused = true);
+        carouselContainer.addEventListener('mouseleave', () => isPaused = false);
+    }
+
+    // Click to fullscreen
+    document.querySelectorAll('.carousel-card').forEach((card, index) => {
+        card.addEventListener('click', () => {
+            // Only original cards (not clones)
+            if (index < totalSlides) {
+                openFullscreen(index);
+            } else {
+                // For clones, map back to original index
+                openFullscreen(index % totalSlides);
+            }
+        });
+    });
+
+    // Open fullscreen viewer
+    function openFullscreen(index) {
+        fullscreenIndex = index;
+        fullscreenImage.src = imageSources[fullscreenIndex];
+        currentSlideSpan.textContent = fullscreenIndex + 1;
+        fullscreenViewer.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scroll
+    }
+
+    // Close fullscreen viewer
+    function closeFullscreen() {
+        fullscreenViewer.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scroll
+    }
+
+    fullscreenClose.addEventListener('click', closeFullscreen);
+
+    // Close on background click
+    fullscreenViewer.addEventListener('click', (e) => {
+        if (e.target === fullscreenViewer) {
+            closeFullscreen();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && fullscreenViewer.classList.contains('active')) {
+            closeFullscreen();
+        }
+        // Arrow key navigation in fullscreen
+        if (fullscreenViewer.classList.contains('active')) {
+            if (e.key === 'ArrowLeft') {
+                navigateFullscreen(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateFullscreen(1);
+            }
+        }
+    });
+
+    // Navigate in fullscreen
+    function navigateFullscreen(direction) {
+        fullscreenIndex += direction;
+        if (fullscreenIndex < 0) fullscreenIndex = totalSlides - 1;
+        if (fullscreenIndex >= totalSlides) fullscreenIndex = 0;
+
+        fullscreenImage.src = imageSources[fullscreenIndex];
+        currentSlideSpan.textContent = fullscreenIndex + 1;
+    }
+
+    fullscreenPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navigateFullscreen(-1);
+    });
+
+    fullscreenNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navigateFullscreen(1);
+    });
 }
+
 
